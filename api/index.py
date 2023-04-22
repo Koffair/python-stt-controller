@@ -1,11 +1,12 @@
-from http.server import BaseHTTPRequestHandler
-import json
+# main.py
+from fastapi import FastAPI
+import os
 
-class handler(BaseHTTPRequestHandler):
+dircontent = os.listdir("/var/www/html")
+print(dircontent)
 
-    def do_GET(self):
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.end_headers()
-        self.wfile.write(json.dumps({'hello': 'world', 'received': 'ok'}))
-        return
+app = FastAPI()
+@app.get("/")
+async def root():
+ return {"dircontetn":dircontent}
+ 
